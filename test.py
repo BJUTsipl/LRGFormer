@@ -12,7 +12,7 @@ import os
 parser = argparse.ArgumentParser(description='PyTorch implementation of dehamer from Guo et al. (2022)')
 parser.add_argument('-d', '--dataset-name', help='name of dataset',choices=['NH', 'dense', 'indoor','outdoor','our_test','Raindrop'], default='Raindrop')
 parser.add_argument('-t', '--test-image-dir', help='test images path', default='./data/classic_test_image/')
-parser.add_argument('-c', '--ckpts-dir', help='ckpts path', default='./raindrop-epoch151-0.04094.pt')
+parser.add_argument('-c', '--ckpts-dir', help='ckpts path', default='./raindrop-epoch15-0.04094.pt')
 parser.add_argument('-val_batch_size', help='Set the validation/test batch size', default=1, type=int)
 args = parser.parse_args()
 
@@ -31,11 +31,11 @@ elif dataset_name == 'indoor':
     val_data_dir = './data/valid_indoor/'
     ckpts_dir = './ckpts/indoor/PSNR3663_ssim09881.pt'
 elif dataset_name == 'outdoor': 
-    val_data_dir = '/media/sipl23/6CEA2B31EA2AF74C/JTY/haze_new'
+    val_data_dir = '/media/sipl23/6CEA2B31EA2AF74C/haze_new'
     ckpts_dir = './ckpts/outdoor/dehamer-epoch1-0.02797.pt'
 elif dataset_name == 'Raindrop':
-    val_data_dir = '/media/zkk/HDD-4T/dataset/Weather/Rain/Raindrop/test_b/test_b'
-    ckpts_dir = '/media/zkk/HDD-4T/mutitask_SF/g4_kxnet1_fft3_Bi4_SGFN_l1 (copy)/g4_kxnet1_fft3_Bi4_SGFN_l1_derain31.26/raindrop-epoch151-0.04094.pt'
+    val_data_dir = '/media/HDD-4T/dataset/Weather/Rain/Raindrop/test_b/test_b'
+    ckpts_dir = '/media/HDD-4T/mutitask_SF/g4_kxnet1_fft3_Bi4_SGFN_l1/g4_kxnet1_fft3_Bi4_SGFN_l1_derain/raindrop-epoch15-0.04094.pt'
 else:
     val_data_dir = args.test_image_dir
     ckpts_dir =  args.ckpts_dir
@@ -51,7 +51,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 from datasetsio  import TrainDatasetFromFolder4,TrainDatasetFromFolder3,TrainDatasetFromFolder2,TestDatasetFromFolder2
 # --- Validation data loader --- #
 # val_data_loader = DataLoader(ValData(dataset_name,val_data_dir), batch_size=val_batch_size, shuffle=False, num_workers=24)
-val_data_loader = DataLoader(TestDatasetFromFolder2('/media/zkk/HDD-4T/dataset/Weather/Rain/Raindrop/test_b/test_b'))
+val_data_loader = DataLoader(TestDatasetFromFolder2('/media/HDD-4T/dataset/Weather/Rain/Raindrop/test_b/test_b'))
 # --- Define the network --- #
 
 # --- Define the network --- #
@@ -71,4 +71,5 @@ start_time = time.time()
 validation_PSNR(net , val_data_loader, device, dataset_name, save_tag=True)
 end_time = time.time() - start_time
 # print('val_psnr: {0:.2f}, val_ssim: {1:.4f}'.format(val_psnr, val_ssim))
+
 print('validation time is {0:.4f}'.format(end_time))
