@@ -1,1 +1,8 @@
-# LRGFormer
+# LRGFormer: A Multiscale Feature Fusion Transformer for Image Restoration
+## Abstract
+Adverse weather conditions can significantly degrade image quality and impair the capture of critical information. Existing restoration networks struggle to effectively combine local, regional, and global features, thereby limiting their ability to handle diverse impacts of such weather. This study proposes the local-region-global transformer (LRGFormer), a transformer-based image restoration model for multiscale feature perception. The model comprises a basic module composed of multi-scale fusion attention (MSFSA) and a channel-spatial dual-attention feed-forward network (CSDF). Specifically, this study designs an MSFSA module. For the first time, it combines rotation-equivariant convolution with local attention for local information extraction and introduces a frequency-domain adaptive attention mechanism. By incorporating a query-aware global adaptive sparse attention mechanism for global information extraction, the network gradually fuses along the channel dimension, enabling progressive capture of spatial and frequency-domain information from the local and regional to global scale. Secondly, a CSDF network structure was designed to enhance channel-spatial interaction and improve the representational capacity of the model. By constructing a basic U-Net framework, the excellent basic modules for image restoration proposed in recent years are compared on a unified framework. Experimental results demonstrated that the proposed basic module can not only better extracts multi-scale features of images and restores image distortion caused by various degradation factors, and also exhibits good universality and generalization. 
+![模型框架图](model.png)
+
+## Code Availability
+
+The official code implementation of LRGFormer will be released soon.
